@@ -59,9 +59,186 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
-
 #include <iostream>
 #include <iomanip>
-#include <string>
 using namespace std;
 
+const int SIZE = 10;
+
+// Display matrix
+void displayMatrix(int matrix[SIZE][SIZE], int rows, int cols)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            cout << setw(5) << matrix[i][j];
+        }
+        cout << endl;
+    }
+}
+
+// Part A: Transpose matrix
+void transposeMatrix(int matrix[SIZE][SIZE], int transpose[SIZE][SIZE], int rows, int cols)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            transpose[j][i] = matrix[i][j];
+        }
+    }
+}
+
+// Part B: Add two matrices
+void addMatrices(int A[SIZE][SIZE], int B[SIZE][SIZE], int result[SIZE][SIZE], int rows, int cols)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            result[i][j] = A[i][j] + B[i][j];
+        }
+    }
+}
+
+// Part C: Multiply two matrices
+void multiplyMatrices(int A[SIZE][SIZE], int B[SIZE][SIZE], int result[SIZE][SIZE],
+                      int rowsA, int colsA, int colsB)
+{
+    for (int i = 0; i < rowsA; i++)
+    {
+        for (int j = 0; j < colsB; j++)
+        {
+            result[i][j] = 0;
+
+            for (int k = 0; k < colsA; k++)
+            {
+                result[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+}
+
+int main()
+{
+    int A[SIZE][SIZE], B[SIZE][SIZE];
+    int result[SIZE][SIZE];
+    int transpose[SIZE][SIZE];
+
+    int rows, cols;
+
+    // Part A
+    cout << "PART A: TRANSPOSE MATRIX" << endl;
+
+    cout << "Enter number of rows: ";
+    cin >> rows;
+
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    cout << "Enter elements:" << endl;
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            cout << "Element [" << i << "][" << j << "]: ";
+            cin >> A[i][j];
+        }
+    }
+
+    cout << "\nOriginal Matrix:" << endl;
+    displayMatrix(A, rows, cols);
+
+    transposeMatrix(A, transpose, rows, cols);
+
+    cout << "\nTranspose Matrix:" << endl;
+    displayMatrix(transpose, cols, rows);
+
+
+    // Part B
+    cout << "\nPART B: MATRIX ADDITION" << endl;
+
+    cout << "Enter rows: ";
+    cin >> rows;
+
+    cout << "Enter columns: ";
+    cin >> cols;
+
+    cout << "Enter first matrix:" << endl;
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            cin >> A[i][j];
+        }
+    }
+
+    cout << "Enter second matrix:" << endl;
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            cin >> B[i][j];
+        }
+    }
+
+    addMatrices(A, B, result, rows, cols);
+
+    cout << "Sum Matrix:" << endl;
+    displayMatrix(result, rows, cols);
+
+
+    // Part C
+    int rowsA, colsA, rowsB, colsB;
+
+    cout << "\nPART C: MATRIX MULTIPLICATION" << endl;
+
+    cout << "Enter rows of A: ";
+    cin >> rowsA;
+
+    cout << "Enter columns of A: ";
+    cin >> colsA;
+
+    cout << "Enter rows of B: ";
+    cin >> rowsB;
+
+    cout << "Enter columns of B: ";
+    cin >> colsB;
+
+    if (colsA != rowsB)
+    {
+        cout << "Matrix multiplication not possible." << endl;
+        return 0;
+    }
+
+    cout << "Enter matrix A:" << endl;
+
+    for (int i = 0; i < rowsA; i++)
+    {
+        for (int j = 0; j < colsA; j++)
+        {
+            cin >> A[i][j];
+        }
+    }
+
+    cout << "Enter matrix B:" << endl;
+
+    for (int i = 0; i < rowsB; i++)
+    {
+        for (int j = 0; j < colsB; j++)
+        {
+            cin >> B[i][j];
+        }
+    }
+
+    multiplyMatrices(A, B, result, rowsA, colsA, colsB);
+
+    cout << "Product Matrix:" << endl;
+    displayMatrix(result, rowsA, colsB);
+
+    return 0;
+}
