@@ -44,10 +44,10 @@
 // =============================================================================
 
 #include <iostream>
-using nespace std;
+
 int getGrade(int score) {
     if (score < 0 || score > 100) {
-        return '\0'; // Invalid score
+        return '\0'; 
     } else if (score >= 80) {
         return 'A';
     } else if (score >= 70) {

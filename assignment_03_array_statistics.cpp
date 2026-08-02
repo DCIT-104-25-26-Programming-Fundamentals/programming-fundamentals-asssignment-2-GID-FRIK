@@ -37,8 +37,91 @@
 //
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
 
+// =============================================================================
 #include <iostream>
 using namespace std;
+
+// Function to calculate sum
+double calculateSum(double numbers[], int n)
+{
+    double sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += numbers[i];
+    }
+    return sum;
+}
+
+// Function to calculate average
+double calculateAverage(double numbers[], int n)
+{
+    double sum = calculateSum(numbers, n);
+    return sum / n;
+}
+
+// Function to find maximum value
+double calculateMaximum(double numbers[], int n)
+{
+    double maximum = numbers[0];
+
+    for (int i = 1; i < n; i++)
+    {
+        if (numbers[i] > maximum)
+        {
+            maximum = numbers[i];
+        }
+    }
+    return maximum;
+}
+
+// Function to find minimum value
+double calculateMinimum(double numbers[], int n)
+{
+    double minimum = numbers[0];
+
+    for (int i = 1; i < n; i++)
+    {
+        if (numbers[i] < minimum)
+        {
+            minimum = numbers[i];
+        }
+    }
+    return minimum;
+}
+
+int main()
+{
+    int n;
+
+    cout << "How many numbers? ";
+    cin >> n;
+
+    if (n <= 0)
+    {
+        cout << "Error: Number of values must be a positive integer." << endl;
+        return 0;
+    }
+
+    double numbers[n];
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Enter number " << i + 1 << ": ";
+        cin >> numbers[i];
+    }
+
+    double sum = calculateSum(numbers, n);
+    double average = calculateAverage(numbers, n);
+    double maximum = calculateMaximum(numbers, n);
+    double minimum = calculateMinimum(numbers, n);
+
+    cout << "Results:" << endl;
+    cout << "Sum = " << sum << endl;
+    cout << "Average = " << average << endl;
+    cout << "Maximum = " << maximum << endl;
+    cout << "Minimum = " << minimum << endl;
+
+    return 0;
+}
 
